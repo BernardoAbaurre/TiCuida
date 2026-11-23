@@ -1,0 +1,1171 @@
+/*
+ * Identidade visual do TiCuida, seguindo o protótipo do Figma (arquivo "TI CUIDA").
+ * O Bulma continua sendo o framework base (grid, modal, tags); aqui ficam as cores,
+ * fontes e componentes próprios do protótipo.
+ */
+:root {
+  /* Cores do protótipo */
+  --azul: #3e6eb0;
+  --azul-medio: #559bd9;
+  --azul-claro: #a5c0e5;
+  --azul-divisor: #275fac;
+  --fundo: #f5f6fb;
+  --cartao: #faf9f9;
+  --campo: rgba(165, 192, 229, 0.39);
+  --placeholder: rgba(90, 89, 89, 0.59);
+  --rotulo-cinza: #b9bcc3;
+  --texto: #232832;
+  --texto-suave: #979797;
+  --linha-cabecalho: #cac9d1;
+  --sombra: 0 4px 4px rgba(0, 0, 0, 0.25);
+
+  --fonte-titulo: 'Montserrat', system-ui, sans-serif;
+  --fonte-texto: 'Poppins', system-ui, sans-serif;
+
+  /* Bulma: primária = azul do protótipo */
+  --bulma-primary-h: 215deg;
+  --bulma-primary-s: 48%;
+  --bulma-primary-l: 47%;
+  --bulma-link-h: 215deg;
+  --bulma-link-s: 48%;
+  --bulma-link-l: 47%;
+  --bulma-family-primary: var(--fonte-texto);
+  --bulma-body-family: var(--fonte-texto);
+}
+
+html,
+body {
+  background: var(--fundo);
+  font-family: var(--fonte-texto);
+  color: #000;
+}
+
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+a {
+  color: var(--azul);
+}
+
+.secao {
+  padding: 1.5rem 1rem 3rem;
+}
+
+@media (min-width: 769px) {
+  .secao {
+    padding: 2.5rem 1.5rem 4rem;
+  }
+}
+
+.texto-pequeno {
+  font-size: 0.85rem;
+}
+
+:focus-visible {
+  outline: 3px solid var(--azul-medio);
+  outline-offset: 2px;
+}
+
+/* ---------- Tipografia ---------- */
+.titulo-pagina {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1.2;
+  color: #000;
+  margin-bottom: 1.25rem;
+}
+
+.titulo-secao {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.75rem;
+  color: #000;
+  margin: 2.25rem 0 1rem;
+}
+
+.titulo-azul {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  color: var(--azul);
+}
+
+/* ---------- Cabeçalho ---------- */
+.cabecalho {
+  background: var(--azul);
+  border-bottom: 5px solid var(--linha-cabecalho);
+  position: relative;
+  z-index: 30;
+}
+
+.cabecalho-conteudo {
+  height: 89px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem 0 1.6rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #fff;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.marca:hover {
+  color: #fff;
+}
+
+.marca img {
+  width: 44px;
+  height: 65px;
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+
+.cabecalho-acoes {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icone-cabecalho {
+  display: inline-flex;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.icone-cabecalho img {
+  width: 45px;
+  height: 47px;
+  object-fit: contain;
+}
+
+.menu-usuario {
+  position: relative;
+}
+
+.menu-usuario-lista {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.6rem);
+  min-width: 220px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: var(--sombra);
+  padding: 0.5rem 0;
+  z-index: 40;
+}
+
+.menu-usuario-lista .nome {
+  padding: 0.4rem 1rem 0.6rem;
+  font-weight: 600;
+  color: var(--azul);
+  border-bottom: 1px solid #e3e8f2;
+  margin-bottom: 0.3rem;
+}
+
+.menu-usuario-lista a,
+.menu-usuario-lista button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  background: none;
+  border: 0;
+  font: inherit;
+  color: #000;
+  cursor: pointer;
+}
+
+.menu-usuario-lista a:hover,
+.menu-usuario-lista button:hover {
+  background: var(--fundo);
+  color: var(--azul);
+}
+
+/* ---------- Rodapé ---------- */
+.rodape {
+  background: var(--azul);
+  border-top: 5px solid rgba(0, 0, 0, 0.29);
+  color: #fff;
+  padding: 1.3rem 1rem 2rem;
+  text-align: center;
+}
+
+.rodape-links {
+  max-width: 300px;
+  margin: 0 auto;
+  list-style: none;
+}
+
+.rodape-links li + li {
+  border-top: 3px solid var(--azul-divisor);
+}
+
+.rodape-links a {
+  display: block;
+  padding: 0.55rem 0;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.5rem;
+  white-space: nowrap;
+}
+
+.rodape-links a:hover {
+  color: var(--azul-claro);
+}
+
+.rodape-redes {
+  display: block;
+  margin: 2.2rem auto 1.5rem;
+  width: 320px;
+  max-width: 100%;
+  height: auto;
+}
+
+.rodape-aviso {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.rodape-aviso a,
+.rodape-aviso strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+/* ---------- Botões ---------- */
+.button.botao {
+  background: var(--azul-medio);
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  box-shadow: var(--sombra);
+  font-family: var(--fonte-texto);
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  height: auto;
+  padding: 0.4rem 1.6rem;
+}
+
+.button.botao:hover {
+  background: #4a8ccc;
+  color: #fff;
+}
+
+.button.botao.is-escuro {
+  background: var(--azul);
+}
+
+.button.botao.is-escuro:hover {
+  background: #355f99;
+}
+
+.button.botao.is-perigo {
+  background: #d93a3a;
+}
+
+.button.botao.is-grande {
+  font-size: 1.25rem;
+  min-height: 55px;
+  padding: 0.6rem 1.1rem;
+}
+
+.button.botao.is-pequeno {
+  font-size: 0.9rem;
+  padding: 0.3rem 1rem;
+}
+
+.button.botao[disabled] {
+  background: var(--azul-claro);
+  box-shadow: none;
+}
+
+.button.botao-texto {
+  background: none;
+  border: 0;
+  box-shadow: none;
+  color: var(--azul);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.acoes-form {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+/* Botão circular de voltar + indicador de etapas */
+.barra-etapas {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.botao-voltar {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--azul);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.botao-voltar img {
+  width: 16px;
+  height: 16px;
+}
+
+.etapas-form {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.etapas-form span {
+  width: 55px;
+  height: 6px;
+  border-radius: 1px;
+  background: var(--azul-claro);
+}
+
+.etapas-form span.ativa {
+  background: var(--azul);
+}
+
+/* ---------- Formulários ---------- */
+.rotulo {
+  display: block;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #000;
+  margin-bottom: 0.3rem;
+}
+
+.rotulo .obrigatorio {
+  color: red;
+}
+
+.input.campo,
+.select.campo select,
+.textarea.campo {
+  background: var(--campo);
+  border: 0;
+  border-radius: 6px;
+  box-shadow: none;
+  font-family: var(--fonte-texto);
+  font-size: 0.875rem;
+  color: #000;
+  height: 2.25rem;
+}
+
+.textarea.campo {
+  height: auto;
+}
+
+.select.campo {
+  width: 100%;
+}
+
+.select.campo select {
+  width: 100%;
+}
+
+.select.campo:not(.is-multiple):not(.is-loading)::after {
+  border-color: #5a5959;
+}
+
+.input.campo::placeholder,
+.textarea.campo::placeholder {
+  color: var(--placeholder);
+  font-weight: 300;
+}
+
+.input.campo.is-danger,
+.select.campo.is-danger select,
+.textarea.campo.is-danger {
+  box-shadow: 0 0 0 2px hsl(348deg 86% 61%);
+}
+
+.input.campo[readonly] {
+  color: #555;
+  cursor: default;
+}
+
+.campo-curto {
+  max-width: 11rem;
+}
+
+/* Campos grandes da tela de login */
+.rotulo-grande {
+  display: block;
+  font-size: 1.5rem;
+  color: #000;
+  margin-bottom: 0.2rem;
+}
+
+.input.campo-destaque {
+  background: var(--azul);
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  box-shadow: var(--sombra);
+  height: 53px;
+  font-size: 1.25rem;
+  padding: 0 0.75rem;
+}
+
+.input.campo-destaque::placeholder {
+  color: rgba(255, 251, 251, 0.59);
+}
+
+.input.campo-destaque.is-danger {
+  box-shadow: 0 0 0 3px hsl(348deg 86% 61%);
+}
+
+/* Caixa azul de texto livre (queixa) */
+.caixa-texto {
+  position: relative;
+}
+
+.caixa-texto textarea {
+  width: 100%;
+  min-height: 223px;
+  resize: vertical;
+  background: var(--azul);
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  box-shadow: var(--sombra);
+  padding: 0.9rem 2.8rem 0.9rem 0.9rem;
+  font-family: var(--fonte-texto);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.caixa-texto textarea::placeholder {
+  color: rgba(255, 255, 255, 0.59);
+}
+
+.caixa-texto textarea.is-danger {
+  box-shadow: 0 0 0 3px hsl(348deg 86% 61%);
+}
+
+.caixa-texto img {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 20px;
+  height: 21px;
+  pointer-events: none;
+}
+
+/* ---------- Cartões ---------- */
+.cartao {
+  background: var(--cartao);
+  border-radius: 10px;
+  box-shadow: var(--sombra);
+  padding: 1.25rem 1.5rem 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.cartao-titulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--azul);
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+/* Lista de sintomas com caixa de seleção à direita */
+.lista-checks {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-check {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  cursor: pointer;
+  color: var(--azul);
+}
+
+.item-check .nome {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.item-check .detalhe {
+  font-family: var(--fonte-texto);
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+.item-check input[type='checkbox'],
+.item-check input[type='radio'] {
+  appearance: none;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--azul);
+  border-radius: 2px;
+  background: #fff;
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+}
+
+.item-check input[type='radio'] {
+  border-radius: 50%;
+}
+
+.item-check input:checked {
+  background: var(--azul);
+}
+
+.item-check input[type='checkbox']:checked::after {
+  content: '';
+  width: 5px;
+  height: 9px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) translate(-1px, -1px);
+}
+
+.item-check input[type='radio']:checked::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.cartao.alarme .item-check input:checked {
+  background: #d93a3a;
+  border-color: #d93a3a;
+}
+
+.escala-intensidade {
+  width: 100%;
+  accent-color: var(--azul);
+}
+
+/* Tabela de confirmação */
+.tabela-dados {
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+.tabela-dados th {
+  font-weight: 600;
+  color: var(--azul);
+  padding: 0.35rem 0.75rem 0.35rem 0;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.tabela-dados td {
+  padding: 0.35rem 0;
+}
+
+/* ---------- Página inicial ---------- */
+.inicio-hero {
+  position: relative;
+  overflow: hidden;
+  background: #cfe3f3 url('./figma/fundo-ondas.png') center / cover no-repeat;
+  border-bottom: 5px solid var(--linha-cabecalho);
+}
+
+.inicio-hero-conteudo {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  min-height: 365px;
+  padding: 2.4rem 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.inicio-hero h1 {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 2.25rem;
+  line-height: 1.2;
+  color: var(--azul);
+  max-width: 404px;
+  position: relative;
+  z-index: 1;
+}
+
+.inicio-hero .button.botao {
+  align-self: flex-start;
+  margin-top: 1.4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.inicio-hero-links {
+  position: relative;
+  z-index: 1;
+  margin-top: 0.9rem;
+  font-weight: 500;
+}
+
+.inicio-ilustracao {
+  position: absolute;
+  right: 6px;
+  bottom: 0;
+  width: 175px;
+  height: 182px;
+  object-fit: cover;
+}
+
+@media (min-width: 769px) {
+  .inicio-hero-conteudo {
+    min-height: 420px;
+    padding-top: 4rem;
+  }
+
+  .inicio-hero h1 {
+    font-size: 3rem;
+    max-width: 560px;
+  }
+
+  .inicio-ilustracao {
+    width: 300px;
+    height: 312px;
+    right: 2rem;
+  }
+}
+
+.sobre-nos {
+  background: var(--azul-medio);
+  color: #fff;
+  padding: 1rem 2rem 3rem;
+}
+
+.sobre-nos-conteudo {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.sobre-nos h2 {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 0.8rem;
+}
+
+.sobre-nos img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 364 / 158;
+  object-fit: cover;
+  object-position: center 30%;
+  margin-bottom: 1.6rem;
+}
+
+.sobre-nos p {
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.sobre-nos p + p {
+  margin-top: 0.8rem;
+}
+
+/* ---------- FAQ ---------- */
+.faq-titulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 3rem;
+  text-align: center;
+  padding: 1.7rem 0 1.5rem;
+}
+
+.faq-item {
+  border-bottom: 1px solid #d0d0d8;
+}
+
+.faq-item:first-child {
+  border-top: 0;
+}
+
+.faq-pergunta {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1.4rem 0.9rem 2.4rem;
+  background: none;
+  border: 0;
+  text-align: left;
+  font-family: var(--fonte-texto);
+  font-size: 1.25rem;
+  color: #000;
+  cursor: pointer;
+}
+
+.faq-pergunta img {
+  flex: none;
+  width: 38px;
+  height: 38px;
+}
+
+.faq-item.aberto {
+  background: var(--azul-medio);
+  border-bottom-color: rgba(0, 0, 0, 0.15);
+}
+
+.faq-item.aberto .faq-pergunta {
+  color: #f5f6fb;
+  font-weight: 600;
+}
+
+.faq-resposta {
+  padding: 0.25rem 2.4rem 2rem;
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.faq-resposta a {
+  color: #fff;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* ---------- Resultado: mapa + unidades ---------- */
+.resultado-mapa {
+  position: relative;
+  height: 370px;
+  background: #e8eaed;
+}
+
+.resultado-mapa .mapa {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.filtro-mapa {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 500;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(2px);
+  padding: 0.6rem 1rem 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.filtro-mapa .rotulo-filtro {
+  font-size: 0.875rem;
+  margin-bottom: 0.35rem;
+}
+
+.filtro-opcoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+}
+
+.pilula {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 131px;
+  justify-content: center;
+  height: 31px;
+  padding: 0 1rem;
+  border-radius: 999px;
+  border: 0;
+  background: #dcebf8;
+  color: var(--azul);
+  font-family: var(--fonte-texto);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.pilula.ativa {
+  background: var(--azul-medio);
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.painel-unidades {
+  background: var(--azul-claro);
+  border-radius: 20px 20px 0 0;
+  margin-top: -14px;
+  position: relative;
+  z-index: 10;
+  padding: 0.7rem 1rem 3rem;
+}
+
+.painel-unidades .puxador {
+  width: 37px;
+  height: 4px;
+  border-radius: 2px;
+  background: #fff;
+  margin: 0 auto 0.6rem;
+}
+
+.painel-unidades-conteudo {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.painel-unidades h1 {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--azul);
+  margin: 0 auto 1rem;
+  max-width: 330px;
+}
+
+.cartao-prioridade {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: var(--sombra);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.unidade {
+  margin-bottom: 1.9rem;
+}
+
+.unidade-cartao {
+  position: relative;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: var(--sombra);
+  display: flex;
+  z-index: 1;
+}
+
+.unidade-corpo {
+  flex: 1;
+  min-width: 0;
+  padding: 1.25rem 1rem 1rem 1.5rem;
+}
+
+.unidade-topo {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.unidade-logo {
+  flex: none;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #eef3fa;
+  border: 1px solid #e1e6ee;
+  display: grid;
+  place-items: center;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  color: var(--azul);
+  font-size: 1.1rem;
+}
+
+.unidade-nome {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.25;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--texto);
+}
+
+.unidade-endereco {
+  font-size: 0.65rem;
+  line-height: 1.2;
+  color: var(--texto-suave);
+  margin-top: 0.3rem;
+}
+
+.unidade-dados {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem 1rem;
+}
+
+.unidade-dados .largo {
+  grid-column: 1 / -1;
+}
+
+.rotulo-dado {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--rotulo-cinza);
+  line-height: 1.3;
+}
+
+.valor-dado {
+  font-weight: 500;
+  font-size: 0.7rem;
+  color: #000;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.valor-dado a {
+  text-transform: none;
+}
+
+.distancia {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-end;
+}
+
+.distancia span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.distancia img {
+  width: 20px;
+  height: 20px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.2rem;
+}
+
+.chip {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: #eef3fa;
+  color: var(--azul);
+}
+
+.chip.destaque {
+  background: var(--azul);
+  color: #fff;
+}
+
+.unidade-expandir {
+  flex: none;
+  width: 56px;
+  border: 0;
+  border-left: 2px solid rgba(165, 192, 229, 0.5);
+  background: none;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.unidade-expandir img {
+  width: 16px;
+  height: 8px;
+  transition: transform 0.2s;
+}
+
+.unidade-expandir.aberto img {
+  transform: rotate(180deg);
+}
+
+.estou-indo {
+  display: block;
+  width: 84%;
+  margin: 0 auto;
+  height: 47px;
+  border: 0;
+  border-radius: 0 0 10px 10px;
+  background: var(--azul);
+  color: #f6faff;
+  box-shadow: var(--sombra);
+  font-family: var(--fonte-texto);
+  font-weight: 700;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.estou-indo:hover {
+  background: #355f99;
+}
+
+.estou-indo[disabled] {
+  background: #8a9bb3;
+  cursor: not-allowed;
+}
+
+/* Marcador do mapa */
+.marcador {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(240, 83, 83, 0.25);
+  display: grid;
+  place-items: center;
+}
+
+.marcador::after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #f05353;
+  box-shadow: 0 0 0 2px #fff;
+}
+
+.marcador.voce::after {
+  background: var(--azul);
+}
+
+.marcador.ativo {
+  background: rgba(62, 110, 176, 0.3);
+}
+
+.marcador.ativo::after {
+  background: var(--azul);
+}
+
+/* ---------- Pop-up (modal) ---------- */
+.popup {
+  position: relative;
+  overflow: hidden;
+  width: 335px;
+  max-width: 92vw;
+  border-radius: 30px;
+  background: #fff;
+  box-shadow: var(--sombra);
+  padding: 3.5rem 2rem 2.5rem;
+  text-align: center;
+}
+
+.popup::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('./figma/fundo-ondas.png') center / cover no-repeat;
+  opacity: 0.5;
+}
+
+.popup > * {
+  position: relative;
+}
+
+.popup-titulo {
+  font-weight: 700;
+  font-size: 2.25rem;
+  line-height: 1;
+  color: var(--azul);
+  margin-bottom: 1.6rem;
+}
+
+.popup-texto {
+  font-size: 1.35rem;
+  line-height: 1.5;
+  color: #000;
+  margin-bottom: 2rem;
+}
+
+.popup .button.botao {
+  width: 212px;
+  max-width: 100%;
+  min-height: 47px;
+  font-weight: 400;
+  font-size: 1.6rem;
+  box-shadow: none;
+}
+
+.protocolo {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--azul);
+}
+
+/* ---------- Perfil ---------- */
+.perfil-topo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.perfil-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 6px;
+  background: #000;
+  display: grid;
+  place-items: center;
+}
+
+.perfil-avatar img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.perfil-topo .titulo-pagina {
+  margin: 0;
+}
+
+/* ---------- Bordas de prioridade (fila e histórico) ---------- */
+.borda-prioridade-emergencia { border-left: 6px solid hsl(348deg 86% 50%); }
+.borda-prioridade-urgente { border-left: 6px solid hsl(42deg 100% 53%); }
+.borda-prioridade-pouco_urgente { border-left: 6px solid hsl(198deg 100% 45%); }
+.borda-prioridade-nao_urgente { border-left: 6px solid hsl(153deg 53% 53%); }
+
+/* Avisos com cantos do protótipo */
+.notification {
+  border-radius: 10px;
+}
