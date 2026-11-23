@@ -1,0 +1,152 @@
+// TiCuida — modelo físico (PostgreSQL 16). Abra em https://dbdiagram.io
+// Gerado a partir do banco criado por schema.sql
+
+Table usuarios {
+  id integer [pk, increment]
+  email varchar(255) [not null, unique]
+  senha_hash varchar(255) [not null]
+  papel varchar(10) [not null]
+  unidade_id integer
+  ativo boolean [not null, default: `true`]
+  criado_em timestamptz [not null, default: `now()`]
+  atualizado_em timestamptz [not null, default: `now()`]
+
+  indexes {
+    (unidade_id) [name: 'ix_usuarios_unidade']
+  }
+  Note: 'CHECK (((((papel)= \'operador\') AND (unidade_id IS NOT NULL)) OR (((papel)= \'paciente\') AND (unidade_id IS NULL))))\nCHECK (((papel)= ANY ((ARRAY[\'paciente\', \'operador\']))))'
+}
+
+Table pacientes {
+  id integer [pk, increment]
+  usuario_id integer [not null, unique]
+  nome varchar(150) [not null]
+  cpf char(11) [not null, unique]
+  data_nascimento date [not null]
+  telefone varchar(20) [not null]
+  contato_emergencia_nome varchar(150) [not null]
+  contato_emergencia_telefone varchar(20) [not null]
+  convenio_id integer [not null]
+  numero_carteirinha varchar(30)
+  consentimento_em timestamptz [not null]
+  criado_em timestamptz [not null, default: `now()`]
+  atualizado_em timestamptz [not null, default: `now()`]
+
+  indexes {
+    (convenio_id) [name: 'ix_pacientes_convenio']
+  }
+  Note: 'CHECK ((cpf ~ \'^[0-9]{11}$\'))'
+}
+
+Table convenios {
+  id integer [pk, increment]
+  nome varchar(100) [not null, unique]
+  ativo boolean [not null, default: `true`]
+}
+
+Table unidade_convenio {
+  unidade_id integer [not null]
+  convenio_id integer [not null]
+
+  indexes {
+    (unidade_id, convenio_id) [pk]
+    (convenio_id) [name: 'ix_unidade_convenio_convenio']
+  }
+}
+
+Table unidades {
+  id integer [pk, increment]
+  nome varchar(150) [not null]
+  tipo varchar(20) [not null]
+  telefone varchar(20)
+  logradouro varchar(150) [not null]
+  numero varchar(10) [not null]
+  bairro varchar(80) [not null]
+  cidade varchar(80) [not null]
+  uf char(2) [not null]
+  cep char(8)
+  latitude numeric(9,6) [not null]
+  longitude numeric(9,6) [not null]
+  aberto_24h boolean [not null, default: `false`]
+  horario_abertura time
+  horario_fechamento time
+  ativo boolean [not null, default: `true`]
+  criado_em timestamptz [not null, default: `now()`]
+  Note: 'CHECK ((aberto_24h OR ((horario_abertura IS NOT NULL) AND (horario_fechamento IS NOT NULL))))\nCHECK (((latitude >= (\'-90\')) AND (latitude <= (90))))\nCHECK (((longitude >= (\'-180\')) AND (longitude <= (180))))\nCHECK (((tipo)= ANY ((ARRAY[\'pronto_atendimento\', \'clinica\', \'hospital\']))))'
+}
+
+Table registros_lotacao {
+  id integer [pk, increment]
+  unidade_id integer [not null]
+  operador_id integer [not null]
+  nivel varchar(5) [not null]
+  registrado_em timestamptz [not null, default: `now()`]
+
+  indexes {
+    (unidade_id, registrado_em) [name: 'ix_registros_lotacao_unidade_data']
+    (operador_id) [name: 'ix_registros_lotacao_operador']
+  }
+  Note: 'CHECK (((nivel)= ANY ((ARRAY[\'baixa\', \'media\', \'alta\']))))'
+}
+
+Table triagens {
+  id integer [pk, increment]
+  paciente_id integer [not null]
+  queixa_principal varchar(500) [not null]
+  intensidade smallint [not null]
+  inicio_sintomas varchar(15) [not null]
+  temperatura numeric(3,1)
+  prioridade varchar(15) [not null]
+  criada_em timestamptz [not null, default: `now()`]
+
+  indexes {
+    (paciente_id, criada_em) [name: 'ix_triagens_paciente_data']
+  }
+  Note: 'CHECK (((inicio_sintomas)= ANY ((ARRAY[\'menos_24h\', \'1_a_3_dias\', \'mais_3_dias\']))))\nCHECK (((intensidade >= 0) AND (intensidade <= 10)))\nCHECK (((prioridade)= ANY ((ARRAY[\'emergencia\', \'urgente\', \'pouco_urgente\', \'nao_urgente\']))))\nCHECK (((temperatura IS NULL) OR ((temperatura >= 34.0) AND (temperatura <= 43.0))))'
+}
+
+Table triagem_sintoma {
+  triagem_id integer [not null]
+  sintoma_id integer [not null]
+
+  indexes {
+    (triagem_id, sintoma_id) [pk]
+    (sintoma_id) [name: 'ix_triagem_sintoma_sintoma']
+  }
+}
+
+Table sintomas {
+  id integer [pk, increment]
+  nome varchar(80) [not null, unique]
+  descricao varchar(255)
+  sinal_alarme boolean [not null, default: `false`]
+  ativo boolean [not null, default: `true`]
+}
+
+Table encaminhamentos {
+  id integer [pk, increment]
+  triagem_id integer [not null, unique]
+  unidade_id integer [not null]
+  protocolo char(8) [not null, unique]
+  status varchar(15) [not null, default: 'a_caminho']
+  criado_em timestamptz [not null, default: `now()`]
+  atualizado_em timestamptz [not null, default: `now()`]
+
+  indexes {
+    (unidade_id, status, criado_em) [name: 'ix_encaminhamentos_fila']
+  }
+  Note: 'CHECK (((status)= ANY ((ARRAY[\'a_caminho\', \'chegou\', \'atendido\', \'nao_compareceu\']))))'
+}
+
+Ref fk_usuarios_unidade: usuarios.unidade_id > unidades.id [delete: restrict]
+Ref fk_pacientes_convenio: pacientes.convenio_id > convenios.id [delete: restrict]
+Ref fk_pacientes_usuario: pacientes.usuario_id - usuarios.id [delete: cascade]
+Ref fk_unidade_convenio_convenio: unidade_convenio.convenio_id > convenios.id [delete: cascade]
+Ref fk_unidade_convenio_unidade: unidade_convenio.unidade_id > unidades.id [delete: cascade]
+Ref fk_registros_lotacao_operador: registros_lotacao.operador_id > usuarios.id [delete: restrict]
+Ref fk_registros_lotacao_unidade: registros_lotacao.unidade_id > unidades.id [delete: cascade]
+Ref fk_triagens_paciente: triagens.paciente_id > pacientes.id [delete: cascade]
+Ref fk_triagem_sintoma_sintoma: triagem_sintoma.sintoma_id > sintomas.id [delete: restrict]
+Ref fk_triagem_sintoma_triagem: triagem_sintoma.triagem_id > triagens.id [delete: cascade]
+Ref fk_encaminhamentos_triagem: encaminhamentos.triagem_id - triagens.id [delete: cascade]
+Ref fk_encaminhamentos_unidade: encaminhamentos.unidade_id > unidades.id [delete: restrict]
