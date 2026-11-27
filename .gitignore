@@ -10,8 +10,8 @@ htmlcov/
 
 # Configuração local e dados
 .env
-instance/
-logs/
+/instance/
+/logs/
 
 # Front-end
 frontend/node_modules/
