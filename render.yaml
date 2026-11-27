@@ -1,0 +1,17 @@
+# Blueprint do Render (plano gratuito). As chaves secretas são geradas pelo próprio Render.
+services:
+  - type: web
+    name: ticuida
+    runtime: docker
+    plan: free
+    branch: main
+    healthCheckPath: /api/health
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: SEED_SENHA
+        value: Ticuida@2026
+      - key: FUSO_HORARIO
+        value: America/Sao_Paulo
